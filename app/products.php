@@ -7,6 +7,7 @@ use TCG\Voyager\Traits\Translatable;
 class products extends Model
 {
     use Translatable;
+    public $with = ['Color','Size'];
     protected $translatable = ['title', 'description'];
     protected $fillable = [
         'categories_id',
@@ -20,4 +21,11 @@ class products extends Model
         'rate_counter',
         'sub_category_id'
     ];
+
+    public function Color() {
+        return $this->belongsToMany('App\Color','product_colors');
+    }
+    public function Size() {
+        return $this->belongsToMany('App\Size','product_sizes');
+    }
 }

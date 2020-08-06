@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Order;
 use App\OrderAccountDetail;
 use App\OrderItem;
+use App\OrderItemDetails;
 class OrderController extends Controller
 {
     public function store_new_order(Request $request) {
@@ -26,7 +27,7 @@ class OrderController extends Controller
          $shipping_id = $request->shipping_id;
          $total = $request->total;
          $note = $request->note;
-         $status = 'In Progress';
+         $status = 'Progress';
 
          // Save Order -> to Database 
          $order = Order::create([
@@ -74,6 +75,22 @@ class OrderController extends Controller
                 'qty' => $item['qty'],
                 'total_price' => $item['amount'] * $item['qty']
             ]);
+
+            if($item['extras']['color'] !== '') {
+                $orderItemsDetails = OrderItemDetails::create([
+                    'order_items_id' => $OrderItems->id,
+                    'type' => 'color',
+                    'value' => $item['extras']['color']
+                ]);
+            }
+            if($item['extras']['size'] !== '') {
+                $orderItemsDetails = OrderItemDetails::create([
+                    'order_items_id' => $OrderItems->id,
+                    'type' => 'size',
+                    'value' => $item['extras']['size']
+                ]);
+            }
+            
         }
 
         return response()->json(['order' => $order]);

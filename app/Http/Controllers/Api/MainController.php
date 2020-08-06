@@ -11,6 +11,7 @@ use App\sections;
 use App\shipping;
 use App\Currency;
 use App\SubCategory;
+use App\traffic;
 use App\Notification;
 class MainController extends Controller
 {
@@ -48,5 +49,19 @@ class MainController extends Controller
            'products' => $products,
            'sub_categories'=>$sub_categories
        ]);
+    }
+
+    public function store_traffic() {
+       $traffic = traffic::count();
+
+       if($traffic >= 1) {
+           $is = traffic::first();
+           $count = $is->value + 1;
+           traffic::where('id',$is->id)->update(['value' => $count]);
+       }else {
+           traffic::create([
+               'value' => 1
+           ]);
+       }
     }
 }

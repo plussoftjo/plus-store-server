@@ -37,3 +37,37 @@ Route::post('coupon/register_used_coupon_to_user','Api\CouponController@register
   Route::get('test_user','Api\AuthController@user_test');
 
 
+/** Traffic */
+Route::get('traffic/store','Api\MainController@store_traffic');
+
+
+
+
+/** Admin Panel For Application */
+
+// Categories Controller 
+Route::get('admin/categories/index','Api\Admin\CategoriesController@index');
+
+// SubCategories 
+Route::get('admin/sub_categories/index','Api\Admin\SubCategories@index');
+
+//Sections 
+Route::get('admin/sections/index','Api\Admin\SectionController@index');
+
+// Products
+Route::get('admin/products/index','Api\Admin\ProductsController@index');
+
+//Sliders
+Route::get('admin/sliders/index','Api\Admin\SlidersController@index');
+
+//Orders 
+Route::get('admin/orders/index','Api\Admin\OrdersController@index');
+
+// Coupons 
+Route::get('admin/coupons/index','Api\Admin\CouponsController@index');
+
+// Currency  
+Route::get('admin/currencies/index','Api\Admin\CurrenciesController@index');
+
+// Shipping  
+Route::get('admin/shippings/index','Api\Admin\ShippingsController@index');

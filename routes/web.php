@@ -20,4 +20,10 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+    Route::get('order_system','Admin\OrderController@index');
+    Route::get('order_show/{id}','Admin\OrderController@show');
+    Route::get('order_system/update/{id}','Admin\OrderController@change_status');
+
+    // Dashboard
+    Route::get('dashboard','Admin\DashboardController@index');
 });
